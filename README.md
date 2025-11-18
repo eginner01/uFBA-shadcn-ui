@@ -285,13 +285,3 @@ await ApiClient.delete(`/v1/sys/users/${id}`);
 - [rFBA](https://github.com/eginner01/rFBA) - Rust 语言后端实现
 
 ---
-
-<div align="center">
-
-Made with ❤️ by uFBA Team
-
-基于 [fastapi_best_architecture_ui](https://github.com/fastapi-practices/fastapi_best_architecture_ui) 重构
-
-© 2024 uFBA-shadcn/ui. All rights reserved.
-
-</div>
