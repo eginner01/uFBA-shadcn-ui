@@ -1,6 +1,5 @@
 # uFBA-shadcn/ui
 
-> 基于 FastAPI 和 shadcn/ui 构建的现代化企业级后台管理系统
 
 <div align="center">
 
