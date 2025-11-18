@@ -1,0 +1,471 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 强制侧边栏在桌面模式下显示 - 展开状态 */
+@media (min-width: 768px) {
+  /* 侧边栏容器 */
+  .group.peer[data-state] {
+    display: block !important;
+  }
+  
+  /* 侧边栏主体 */
+  [data-sidebar="sidebar"] {
+    transform: translateX(0) !important;
+    left: 0 !important;
+  }
+  
+  /* 强制展开状态 */
+  .group.peer[data-state="collapsed"] {
+    /* 改为展开 */
+  }
+  
+  .group.peer[data-collapsible="offcanvas"] > div:first-child {
+    width: 16rem !important; /* 展开宽度 */
+  }
+}
+
+/* 侧边栏样式增强 - 现代深色商务风格 */
+[data-sidebar="sidebar"] {
+  background: hsl(var(--sidebar-background)) !important;
+  color: hsl(var(--sidebar-foreground)) !important;
+  border-right: 1px solid hsl(var(--sidebar-border));
+}
+
+/* 侧边栏所有文字元素 */
+[data-sidebar="sidebar"],
+[data-sidebar="sidebar"] *,
+[data-sidebar="sidebar"] button,
+[data-sidebar="sidebar"] a,
+[data-sidebar="sidebar"] span,
+[data-sidebar="sidebar"] div,
+[data-sidebar="sidebar"] h1,
+[data-sidebar="sidebar"] h2,
+[data-sidebar="sidebar"] h3,
+[data-sidebar="sidebar"] p {
+  color: #f9fafb !important; /* 强制所有文字为浅色 */
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* 侧边栏按钮样式 */
+[data-sidebar="sidebar"] button {
+  background: transparent !important;
+  color: #f9fafb !important;
+  border: none !important;
+}
+
+/* 侧边栏激活状态 */
+[data-sidebar="sidebar"] [data-active="true"],
+[data-sidebar="sidebar"] button[data-active="true"] {
+  background: hsl(var(--sidebar-accent)) !important;
+  color: hsl(var(--primary)) !important;
+  border-left: 2px solid hsl(var(--primary));
+  font-weight: 600;
+}
+
+/* 侧边栏悬停状态 */
+[data-sidebar="sidebar"] button:hover,
+[data-sidebar="sidebar"] a:hover {
+  background: hsl(var(--sidebar-accent)) !important;
+  color: hsl(var(--sidebar-foreground)) !important;
+  transition: all 0.2s ease;
+}
+
+/* 确保图标也是浅色 */
+[data-sidebar="sidebar"] svg {
+  color: #f9fafb !important;
+  fill: #f9fafb !important;
+}
+
+@layer base {
+  :root {
+    /* 深色主题 - 类似截图风格 */
+    --background: 0 0% 7%;
+    --foreground: 0 0% 95%;
+    --card: 0 0% 10%;
+    --card-foreground: 0 0% 95%;
+    --popover: 0 0% 10%;
+    --popover-foreground: 0 0% 95%;
+    --primary: 0 0% 80%;
+    --primary-foreground: 0 0% 10%;
+    --secondary: 0 0% 15%;
+    --secondary-foreground: 0 0% 95%;
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 55%;
+    --accent: 0 0% 15%;
+    --accent-foreground: 0 0% 95%;
+    --destructive: 0 62% 50%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 18%;
+    --input: 0 0% 15%;
+    --ring: 0 0% 80%;
+    --radius: 0.5rem;
+    --chart-1: 0 0% 60%;
+    --chart-2: 0 0% 50%;
+    --chart-3: 0 0% 70%;
+    --chart-4: 0 0% 45%;
+    --chart-5: 0 0% 65%;
+    
+    /* 侧边栏配色 - 深色 */
+    --sidebar-background: 0 0% 8%;
+    --sidebar-foreground: 0 0% 85%;
+    --sidebar-primary: 0 0% 80%;
+    --sidebar-primary-foreground: 0 0% 10%;
+    --sidebar-accent: 0 0% 15%;
+    --sidebar-accent-foreground: 0 0% 95%;
+    --sidebar-border: 0 0% 15%;
+    --sidebar-ring: 0 0% 80%;
+  }
+
+  .dark {
+    --background: 0 0% 8%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 12%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 10%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 217 91% 60%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 0 0% 18%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 18%;
+    --muted-foreground: 0 0% 60%;
+    --accent: 217 91% 60%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 20%;
+    --input: 0 0% 18%;
+    --ring: 217 91% 60%;
+    --chart-1: 217 91% 60%;
+    --chart-2: 210 85% 55%;
+    --chart-3: 200 90% 50%;
+    --chart-4: 195 85% 45%;
+    --chart-5: 225 80% 65%;
+    
+    /* 侧边栏配色 */
+    --sidebar-background: 0 0% 10%;
+    --sidebar-foreground: 0 0% 98%;
+    --sidebar-primary: 217 91% 60%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 0 0% 18%;
+    --sidebar-accent-foreground: 0 0% 98%;
+    --sidebar-border: 0 0% 20%;
+    --sidebar-ring: 217 91% 60%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #535bf2;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+button:hover {
+  border-color: #646cff;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+/* 自定义滚动条 */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-secondary;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-muted-foreground/30 hover:bg-muted-foreground/50 rounded;
+}
+
+/* 背景光晕效果 */
+body::before {
+  content: '';
+  position: fixed;
+  top: -50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    circle at center,
+    rgba(59, 130, 246, 0.08) 0%,
+    rgba(59, 130, 246, 0.04) 25%,
+    transparent 50%
+  );
+  transform: translateX(-50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  bottom: -30%;
+  right: -10%;
+  width: 80%;
+  height: 80%;
+  background: radial-gradient(
+    circle at center,
+    rgba(59, 130, 246, 0.06) 0%,
+    rgba(99, 102, 241, 0.03) 30%,
+    transparent 60%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* 确保内容在光晕之上 */
+#root {
+  position: relative;
+  z-index: 1;
+}
+
+/* 增强卡片视觉效果 - 外层嵌套半透明边框 */
+[class*="border-[#333333]"],
+[class*="border-\\[\\#333333\\]"] {
+  border-width: 1px !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+/* 表格和表单容器的微妙光晕 */
+[class*="bg-[#1e1e1e]"],
+[class*="bg-\\[\\#1e1e1e\\]"] {
+  background: linear-gradient(
+    135deg,
+    rgba(30, 30, 30, 0.95) 0%,
+    rgba(30, 30, 30, 0.98) 100%
+  ) !important;
+  position: relative;
+}
+
+[class*="bg-[#1e1e1e]"]::before,
+[class*="bg-\\[\\#1e1e1e\\]"]::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(
+    circle at 30% 30%,
+    rgba(59, 130, 246, 0.03) 0%,
+    transparent 60%
+  );
+  pointer-events: none;
+  border-radius: inherit;
+  z-index: 0;
+}
+
+/* 确保内容在渐变之上 */
+[class*="bg-[#1e1e1e]"] > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ============================================
+   高级视觉效果增强
+   ============================================ */
+
+/* 1. 动态网格背景 */
+body {
+  background-image: 
+    linear-gradient(rgba(59, 130, 246, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(59, 130, 246, 0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+  background-position: -1px -1px;
+}
+
+/* 2. 页面标题渐变动画 */
+h1[class*="text-3xl"] {
+  background: linear-gradient(135deg, #ffffff 0%, #93c5fd 50%, #3b82f6 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradient-shift 8s ease infinite;
+  background-size: 200% 200%;
+}
+
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* 3. 卡片样式（已移除悬浮效果和过渡动画） */
+
+/* 4. 按钮涟漪效果 */
+button {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+button::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+button:active::before {
+  width: 300px;
+  height: 300px;
+}
+
+button:hover {
+  transform: translateY(-2px);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+/* 5. 加载骨架屏扫光效果 */
+@keyframes shimmer {
+  0% { background-position: -1000px 0; }
+  100% { background-position: 1000px 0; }
+}
+
+.loading-shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.08) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  background-size: 1000px 100%;
+  animation: shimmer 2s infinite linear;
+}
+
+/* 6. Badge标签hover微动画 */
+[class*="Badge"] {
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+}
+
+[class*="Badge"]:hover {
+  transform: scale(1.08);
+}
+
+/* 7. 输入框聚焦 */
+input:focus,
+textarea:focus {
+  border-color: rgba(59, 130, 246, 0.6) !important;
+  outline: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 8. 表格行hover渐变高亮 */
+tbody tr {
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+tbody tr:hover {
+  background: linear-gradient(
+    90deg,
+    rgba(59, 130, 246, 0.06) 0%,
+    rgba(59, 130, 246, 0.1) 50%,
+    rgba(59, 130, 246, 0.06) 100%
+  ) !important;
+}
+
+tbody tr::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 3px;
+  background: linear-gradient(180deg, transparent 0%, #3b82f6 50%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+tbody tr:hover::after {
+  opacity: 1;
+}
+
+/* 9. 平滑滚动 */
+html {
+  scroll-behavior: smooth;
+}
+
+/* 10. 文字效果类（已移除发光） */
+
+/* ============================================
+   Dialog 弹窗居中修复
+   ============================================ */
+
+/* 确保 Dialog Overlay 覆盖整个视口 - 多种选择器确保兼容性 */
+[data-radix-dialog-overlay],
+[data-radix-react-dialog-overlay] {
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 50 !important;
+}
+
+/* 确保 Dialog Content 居中显示 - 多种选择器确保兼容性 */
+[data-radix-dialog-content],
+[data-radix-react-dialog-content] {
+  position: fixed !important;
+  left: 50% !important;
+  top: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  z-index: 51 !important;
+  max-height: 90vh !important;
+  overflow-y: auto !important;
+}
+
+/* 额外确保：通过 Portal 渲染的 Dialog */
+[role="dialog"] {
+  position: fixed !important;
+  left: 50% !important;
+  top: 50% !important;
+  transform: translate(-50%, -50%) !important;
+}
+
+/* 当弹窗打开时，防止页面滚动影响定位 */
+body:has([data-radix-dialog-overlay]),
+body:has([role="dialog"]) {
+  overflow: hidden;
+}
